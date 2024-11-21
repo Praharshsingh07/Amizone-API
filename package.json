@@ -1,0 +1,31 @@
+{
+  "name": "amizone-fetch",
+  "version": "1.0.0",
+  "description": "REST API to fetch data from Amizone using puppeteer",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Pawan Kolhe <contact@pawankolhe.com> (https://pawankolhe.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1",
+    "jsdom": "^16.4.0",
+    "puppeteer": "^23.8.0",
+    "puppeteer-extra": "^3.1.15",
+    "puppeteer-extra-plugin-block-resources": "^2.2.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PawanKolhe/amizone-fetch-api.git"
+  },
+  "engines": {
+    "node": "14.x"
+  }
+}
