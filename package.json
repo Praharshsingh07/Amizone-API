@@ -4,12 +4,12 @@
   "description": "REST API to fetch data from Amizone using puppeteer",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true node src/index.js",
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Pawan Kolhe <contact@pawankolhe.com> (https://pawankolhe.com/)",
+  "author": "Praharsh raj singh <praharshsingh07@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",
@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/PawanKolhe/amizone-fetch-api.git"
+    "url": "https://github.com/praharshsingh07/amizone-api.git"
   },
   "engines": {
     "node": "14.x"

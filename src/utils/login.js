@@ -11,8 +11,18 @@ blockResourcesPlugin.blockedTypes.add('media');
 
 const loginToAmizone = async (credentials) => {
   const browser = await puppeteer.launch({
-    headless: false, // Disable headless mode for debugging
-    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+    headless: "new",
+    executablePath: process.env.CHROME_PATH || '/usr/bin/chromium',
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--disable-software-rasterizer',
+      '--window-size=1280,800',
+      '--disable-web-security',
+      '--disable-features=IsolateOrigins,site-per-process'
+    ],
   });
 
   const page = await browser.newPage();
