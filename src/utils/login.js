@@ -12,7 +12,6 @@ blockResourcesPlugin.blockedTypes.add('media');
 const loginToAmizone = async (credentials) => {
   const browser = await puppeteer.launch({
     headless: "new",
-    executablePath: process.env.CHROME_PATH || '/usr/bin/chromium',
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
