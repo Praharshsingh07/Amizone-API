@@ -1,12 +1,11 @@
-# Use a build argument for platform flexibility
+# Use Node.js 14 as required in package.json
 ARG TARGETPLATFORM
-FROM --platform=$TARGETPLATFORM node:14-buster-slim
+FROM --platform=$TARGETPLATFORM node:16-bullseye-slim
 
-# Install dependencies required by Chromium
+# Install dependencies required by Puppeteer
+# Install dependencies required by Puppeteer
 RUN apt-get update \
     && apt-get install -y \
-    chromium \
-    chromium-driver \
     fonts-ipafont-gothic \
     fonts-wqy-zenhei \
     fonts-thai-tlwg \
@@ -15,10 +14,27 @@ RUN apt-get update \
     libnss3 \
     libxss1 \
     libasound2 \
-    xvfb \
+    libdrm2 \
+    libgbm1 \
+    libatk1.0-0 \
+    libcairo2 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libatk-bridge2.0-0 \
+    libx11-xcb1 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxfixes3 \
+    libxrandr2 \ 
+    libcups2 \
+    libxkbcommon0 \ 
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
+
+# Set environment variables for Puppeteer
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=false \
+    PUPPETEER_EXECUTABLE_PATH=""
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -26,10 +42,10 @@ WORKDIR /usr/src/app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
+# Install dependencies, including Puppeteer
 RUN npm install --only=production
 
-# Bundle app source
+# Copy all source files (Fix missing index.js)
 COPY . .
 
 # Add user for security
@@ -38,12 +54,11 @@ RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && chown -R pptruser:pptruser /home/pptruser \
     && chown -R pptruser:pptruser /usr/src/app
 
-# Run as non-privileged user
+# Switch to non-root user
 USER pptruser
 
-# Set environment variables
-ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
-    CHROME_PATH=/usr/bin/chromium
+# Install Chromium with Puppeteer (must be done after switching user)
+RUN npx puppeteer browsers install chrome
 
 # Expose port for Express server
 EXPOSE 3000

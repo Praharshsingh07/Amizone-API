@@ -1,9 +1,32 @@
+# Node.js dependencies (will be installed inside the container)
 node_modules
 npm-debug.log
+yarn-error.log
+pnpm-debug.log
+
+# Local environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+logs
+*.log
+
+# Git & Editor files
 .git
 .gitignore
-.env
-*.md
+.vscode
+.idea
 .DS_Store
-Dockerfile
+
+# Build artifacts
+dist
+build
+coverage
+
+# Docker-related files (if needed)
 .dockerignore
+docker-compose.yml

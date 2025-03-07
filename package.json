@@ -4,7 +4,7 @@
   "description": "REST API to fetch data from Amizone using puppeteer",
   "main": "src/index.js",
   "scripts": {
-    "start": "PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true node src/index.js",
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -26,6 +26,6 @@
     "url": "https://github.com/praharshsingh07/amizone-api.git"
   },
   "engines": {
-    "node": "14.x"
+    "node": ">=16"
   }
 }
